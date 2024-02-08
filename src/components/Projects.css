@@ -1,0 +1,22 @@
+.projectCardItem {
+  margin: 5px;
+  padding: 5px;
+  border-radius: 10px !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.projectCardItem image {
+  width: 80%;
+  border-radius: 50px !important;
+}
+.projects {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  background-color: coral;
+}
+.projects p {
+  width: 50%;
+}

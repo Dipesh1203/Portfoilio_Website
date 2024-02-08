@@ -1,0 +1,18 @@
+* {
+  text-decoration: none;
+}
+.getintouch {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 0;
+  background-color: antiquewhite;
+  padding: 0%;
+}
+
+.getintouchgif {
+  width: 50%;
+}
+.getInTouchForm {
+  padding: 10px;
+}
