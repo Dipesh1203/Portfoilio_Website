@@ -1,9 +1,14 @@
 import React from "react";
 import SkillCarousal from "./SkillCarousal";
+import "./Skills.css";
 
 const Skills = () => {
   return (
-    <div className="skill">
+    <div
+      id="skillsSection"
+      style={{ backdropFilter: "blur(30px)" }}
+      className="skill"
+    >
       <h1>Skills</h1>
       <p>
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illo incidunt

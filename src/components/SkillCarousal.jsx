@@ -5,7 +5,14 @@ import "./SkillCarousal.css";
 
 function Item(props) {
   return (
-    <Paper className="paper">
+    <Paper
+      sx={{
+        backgroundColor: "rgba(43, 43, 43, 0.752)",
+        backdropFilter: "blur(30px)",
+        color: "#fff",
+      }}
+      className="paper"
+    >
       <div>
         <img className="image" src={props.item.image} alt="" />
         <p>{props.item.skillTitle}</p>
@@ -65,8 +72,8 @@ const SkillCarousal = () => {
       navButtonsAlwaysVisible={true}
       navButtonsProps={{
         style: {
-          backgroundColor: "#4f4e4e",
-          borderRadius: "10px",
+          backgroundColor: "rgba(43, 43, 43, 0.752)",
+          borderRadius: "5px",
         },
       }}
       timeout={10}

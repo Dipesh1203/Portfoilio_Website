@@ -6,6 +6,10 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Unstable_Grid2";
 import Paper from "@mui/material/Paper";
 import "../components/Projects.css";
+import PropTypes from "prop-types";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Typography from "@mui/material/Typography";
 
 function Item(props) {
   return (
@@ -63,8 +67,12 @@ const Projects = () => {
       title: "random",
     },
   ];
+  const glassyEffectStyle = {
+    // Adjust the color and opacity as needed
+    backdropFilter: "blur(30px)", // Adjust the blur strength as needed
+  };
   return (
-    <section className="projects">
+    <section id="projectSection" style={glassyEffectStyle} className="projects">
       <h1>Projects</h1>
       <p>
         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Hic assumenda
@@ -72,15 +80,7 @@ const Projects = () => {
         deserunt exercitationem! Et odit culpa libero quos facere eligendi
         aspernatur.
       </p>
-      <ButtonGroup
-        variant="contained"
-        color="info"
-        aria-label="Basic button group"
-      >
-        <Button>Tab 1</Button>
-        <Button>Tab 1</Button>
-        <Button>Tab 1</Button>
-      </ButtonGroup>
+
       <Box sx={{ flexGrow: 1 }}>
         <Grid
           container

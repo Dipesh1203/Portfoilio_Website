@@ -1,0 +1,24 @@
+.banner {
+  margin-top: 0;
+  /* padding: 260px 0 100px 0; */
+  /* background-image: url("./assets/banner-bg.png"); */
+  display: flex;
+  justify-content: center;
+}
+.intro {
+  display: flex;
+  flex-direction: column;
+  width: 96%;
+  justify-content: space-evenly;
+}
+.intro h1 {
+  font-size: 65px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+}
+.profile-img img {
+  padding: 2rem;
+
+  /* margin: auto; */
+  width: 600px;
+}

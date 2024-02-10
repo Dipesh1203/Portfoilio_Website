@@ -14,11 +14,10 @@ body {
   background-color: transparent;
   background-image: url("./assets/banner-bg.png");
   background-size: cover; /* Adjust the size as needed */
-  background-repeat: no-repeat;
+  /* background-repeat: no-repeat; */
   color: #fff !important;
   font-family: "Centra", sans-serif !important;
   height: 100vh;
-  cursor: none;
 }
 
 h1,
@@ -75,50 +74,7 @@ button {
 }
 
 /* Banner */
-.banner {
-  margin-top: 0;
-  /* padding: 260px 0 100px 0; */
-  /* background-image: url("./assets/banner-bg.png"); */
-  display: flex;
-  justify-content: center;
-}
-.intro {
-  display: flex;
-  flex-direction: column;
-  width: 96%;
-  justify-content: space-evenly;
-}
-.intro h1 {
-  font-size: 65px;
-  font-weight: 800;
-  letter-spacing: 0.8px;
-}
-.profile-img img {
-  padding: 2rem;
 
-  /* margin: auto; */
-  width: 600px;
-}
-
-/* skills */
-.skill {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-self: center;
-  text-align: center;
-  padding: 5px;
-  border-radius: 25px;
-  background-color: #4f4e4e;
-  margin: auto;
-}
-.skill-slider {
-  display: flex;
-  overflow: hidden;
-  scroll-behavior: auto;
-  width: 80%;
-}
-.skill-slider div img {
-  width: 250px;
+.container {
+  /* padding: 0% !important; */
 }

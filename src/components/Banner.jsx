@@ -4,7 +4,9 @@ import Container from "@mui/material/Container";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
+import { Button } from "@mui/material";
 import Grid from "@mui/material/Grid";
+import "./Banner.css";
 
 export default function Banner() {
   return (
@@ -14,7 +16,19 @@ export default function Banner() {
           <Grid item xs={6}>
             <div className="intro">
               <div>
-                <p variant="outlined">Welcome to my Portfolio</p>
+                <Button
+                  type="none"
+                  variant="outlined"
+                  color="inherit"
+                  style={{
+                    backdropFilter: "blur(60px)",
+                    color: "#fff",
+                    height: "60px",
+                    fontSize: "1rem",
+                  }}
+                >
+                  Welcome to my Portfolio
+                </Button>
               </div>
               <h1>Hii I am Dipesh Prajapat</h1>
               <h4>MERN Stack Developer | Problem Solver | UI/UX Desginer</h4>
