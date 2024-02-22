@@ -2,6 +2,7 @@ import * as React from "react";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import "./Footer.css";
+import Profile from "./Profile";
 
 export default function Footer() {
   return (
@@ -11,7 +12,7 @@ export default function Footer() {
         className="nav-bar MuiAppBar-colorTransparent footer-bar"
       >
         <div className="footer-left">
-          <h2>Logo</h2>
+          <Profile />
         </div>
 
         <div className="footer-right">

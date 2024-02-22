@@ -2,7 +2,7 @@ import React from "react";
 import Box from "@mui/material/Box";
 import { Button } from "@mui/material";
 import TextField from "@mui/material/TextField";
-import "../components/Getintouch.css";
+import "./Getintouch.css";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 
 const Getintouch = () => {

@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState, useEffect } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Container from "@mui/material/Container";
 import { styled } from "@mui/material/styles";
@@ -8,7 +9,7 @@ import { Button } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import "./Banner.css";
 
-export default function Banner() {
+export default function Banner(props) {
   return (
     <>
       <section className="banner">
@@ -21,6 +22,8 @@ export default function Banner() {
                   variant="outlined"
                   color="inherit"
                   style={{
+                    background:
+                      "linear-gradient(to right, #ff00ffc0, #7b18edc1)",
                     backdropFilter: "blur(60px)",
                     color: "#fff",
                     height: "60px",
@@ -30,14 +33,11 @@ export default function Banner() {
                   Welcome to my Portfolio
                 </Button>
               </div>
-              <h1>Hii I am Dipesh Prajapat</h1>
-              <h4>MERN Stack Developer | Problem Solver | UI/UX Desginer</h4>
-              <p>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eos
-                iste ipsa ab enim laborum doloribus reprehenderit tempora
-                voluptas pariatur ducimus. Incidunt nesciunt laudantium libero
-                omnis distinctio itaque dolore atque pariatur!
-              </p>
+              <h1 className="typewriter-text">
+                Hi! I'm {props.data ? props.data.name : <></>}
+              </h1>
+              <h4>{props.data ? props.data.headline : <></>}</h4>
+              <p>{props.data ? props.data.intro : <></>}</p>
             </div>
           </Grid>
           <Grid item xs={4}>

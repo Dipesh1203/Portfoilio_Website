@@ -2,7 +2,8 @@ import React from "react";
 import SkillCarousal from "./SkillCarousal";
 import "./Skills.css";
 
-const Skills = () => {
+const Skills = (props) => {
+  let data = props ? props.data : {};
   return (
     <div
       id="skillsSection"
@@ -10,13 +11,7 @@ const Skills = () => {
       className="skill"
     >
       <h1>Skills</h1>
-      <p>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illo incidunt
-        perferendis, eius laborum beatae amet nesciunt voluptate iure. Dolor
-        voluptate tempore quae provident vel exercitationem modi consectetur
-        ipsam dolore eligendi!
-      </p>
-      <SkillCarousal />
+      <h3>Areas Of Interest</h3>
     </div>
   );
 };
