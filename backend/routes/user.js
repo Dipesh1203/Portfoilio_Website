@@ -46,4 +46,8 @@ router.get("/logout", (req, res, next) => {
   });
 });
 
+//dashboard routes
+router.get("/dashboard", async (req, res) => {
+  res.send("DashBoard");
+});
 module.exports = router;
