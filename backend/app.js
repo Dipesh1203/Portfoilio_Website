@@ -40,6 +40,10 @@ app.get("/home", (req, res) => {
 });
 app.use("/profile", profileRoute);
 app.use("/user", userRouter);
+app.get("/", function (req, res) {
+  const currentUser = req.locals.currentUser;
+  res.send(`Welcome, ${currentUser.name}!`);
+});
 
 mongoose
   .connect("mongodb://127.0.0.1:27017/skillMagnet")

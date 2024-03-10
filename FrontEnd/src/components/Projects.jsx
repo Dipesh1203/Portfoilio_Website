@@ -1,84 +1,43 @@
 import React from "react";
-import Button from "@mui/material/Button";
-import ButtonGroup from "@mui/material/ButtonGroup";
-import { experimentalStyled as styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
-import Grid from "@mui/material/Unstable_Grid2";
-import Paper from "@mui/material/Paper";
 import "../components/Projects.css";
-import PropTypes from "prop-types";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-import Typography from "@mui/material/Typography";
+import Grid from "@mui/material/Unstable_Grid2";
+import ProjectCard from "./ProjectCard";
 
-function Item(props) {
-  return (
-    <div className="projectCardItem">
-      <img src={props.item.image} alt="" />
-      <p>{props.item.title}</p>
-    </div>
-  );
-}
-
-// const Item = styled(Paper)(({ theme }) => ({
-//   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-//   ...theme.typography.body2,
-//   padding: theme.spacing(2),
-//   textAlign: "center",
-//   color: theme.palette.text.secondary,
-// }));
-
-const Projects = () => {
-  let items = [
+const Projects = (props) => {
+  const projectData = [
     {
+      title: "E-commerce Website",
+      description:
+        "Developed a full-stack e-commerce website with user authentication, product listings, and a shopping cart feature. Utilized React for the frontend and Node.js with Express for the backend. Integrated payment gateway for online transactions.",
       image: "./src/assets/banner-bg.png",
-      title: "random",
+      link: "https://github.com/username/ecommerce-project",
+      ownerProfile: "60cbbbd3e42061d7c7e72837", // Replace with a valid ObjectId
     },
     {
+      title: "Mobile App - Task Manager",
+      description:
+        "Built a mobile app for task management with features like creating tasks, setting deadlines, and marking tasks as completed. Implemented the app using React Native for cross-platform compatibility.",
       image: "./src/assets/banner-bg.png",
-      title: "random",
+      link: "https://github.com/username/task-manager-app",
+      ownerProfile: "60cbbbd3e42061d7c7e72838", // Replace with a valid ObjectId
     },
-    {
-      image: "./src/assets/banner-bg.png",
-      title: "random",
-    },
-    {
-      image: "./src/assets/banner-bg.png",
-      title: "random",
-    },
-    {
-      image: "./src/assets/banner-bg.png",
-      title: "random",
-    },
-    {
-      image: "./src/assets/banner-bg.png",
-      title: "random",
-    },
-    {
-      image: "./src/assets/banner-bg.png",
-      title: "random",
-    },
-    {
-      image: "./src/assets/banner-bg.png",
-      title: "random",
-    },
-    {
-      image: "./src/assets/banner-bg.png",
-      title: "random",
-    },
+    // Add more projects as needed
   ];
-  const glassyEffectStyle = {
-    // Adjust the color and opacity as needed
-    backdropFilter: "blur(30px)", // Adjust the blur strength as needed
-  };
+
   return (
-    <section id="projectSection" style={glassyEffectStyle} className="projects">
+    <section
+      id="projectSection"
+      style={{ backdropFilter: "blur(30px)" }}
+      className="projects"
+    >
       <h1>Projects</h1>
       <p>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Hic assumenda
-        deleniti, laborum dolor, nihil, laudantium aliquid sit ad veniam dolorem
-        deserunt exercitationem! Et odit culpa libero quos facere eligendi
-        aspernatur.
+        Hello there! Welcome to my portfolio projects section. Here, I'd like to
+        showcase some of the exciting projects I've had the privilege to work
+        on. Each project has been a journey of learning, creativity, and
+        problem-solving. Feel free to explore and get a glimpse of the diverse
+        skills and technologies I've had the opportunity to engage with.
       </p>
 
       <Box sx={{ flexGrow: 1 }}>
@@ -87,11 +46,15 @@ const Projects = () => {
           spacing={{ xs: 2, md: 3 }}
           columns={{ xs: 4, sm: 8, md: 12 }}
         >
-          {items.map((item, i) => (
-            <Grid xs={2} sm={4} md={4}>
-              <Item key={i} item={item} />
-            </Grid>
-          ))}
+          {projectData ? (
+            projectData.map((item, i) => (
+              <Grid xs={2} sm={4} md={4}>
+                <ProjectCard key={i} item={item} />
+              </Grid>
+            ))
+          ) : (
+            <></>
+          )}
         </Grid>
       </Box>
     </section>
