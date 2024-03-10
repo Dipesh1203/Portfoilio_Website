@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import "./App.css";
+import axios from "axios";
 import Container from "@mui/material/Container";
 import Nav from "./components/Nav";
 import Banner from "./components/Banner";
@@ -7,49 +7,25 @@ import Footer from "./components/Footer";
 import Skills from "./components/Skills";
 import Projects from "./components/Projects";
 import Getintouch from "./components/Getintouch";
-import { Link as ScrollLink, animateScroll as scroll } from "react-scroll";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
+import "./index.css";
+import Layout from "./layout/Layout";
+import SideBar from "./components/SideBar";
+import Home from "./components/Home";
+import Profile from "./components/Profile";
+import Dashboard from "./components/Dashboard";
 
 function App() {
-  let [data, setData] = useState(null);
-
-  useEffect(() => {
-    // Perform some side effect, e.g., fetch data from an API
-    const fetchData = async () => {
-      try {
-        let response = await fetch(
-          "http://localhost:8080/profile/65ccbbcae42061d7c7e72835"
-        );
-        let res = await response.json();
-        console.log(res);
-        setData(res);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchData();
-
-    // Cleanup function (optional)
-    return () => {
-      // Perform cleanup, e.g., unsubscribe from a subscription
-      console.log("Cleanup");
-    };
-  }, []);
   return (
     <>
-      <div className="App">
-        <Nav />
-        <div className="container">
-          {data ? <p>{data.name}</p> : ""}
-
-          <Banner data={data} />
-          <Skills data={data} />
-          <Projects />
-          <Getintouch />
-        </div>
-        <Container></Container>
-        <Footer />
-      </div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" exact element={<Home></Home>} />
+          <Route path="/profile" exact element={<Profile></Profile>} />
+          <Route path="/getintouch" exact element={<Getintouch></Getintouch>} />
+          <Route path="/dashboard" exact element={<Dashboard></Dashboard>} />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }

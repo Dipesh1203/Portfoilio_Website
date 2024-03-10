@@ -6,15 +6,16 @@ import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import { Button } from "@mui/material";
-import Grid from "@mui/material/Grid";
+import Grid from "@mui/material/Unstable_Grid2";
 import "./Banner.css";
 
 export default function Banner(props) {
   return (
     <>
-      <section className="banner">
+      <div className="banner">
+        {console.log(props.profile.name + " - ")}
         <Grid container spacing={3}>
-          <Grid item xs={6}>
+          <Grid item xs={8}>
             <div className="intro">
               <div>
                 <Button
@@ -34,10 +35,10 @@ export default function Banner(props) {
                 </Button>
               </div>
               <h1 className="typewriter-text">
-                Hi! I'm {props.data ? props.data.name : <></>}
+                Hi! I'm {props.profile ? props.profile.name : <></>}
               </h1>
-              <h4>{props.data ? props.data.headline : <></>}</h4>
-              <p>{props.data ? props.data.intro : <></>}</p>
+              <h3>{props.profile ? props.profile.headline : <></>}</h3>
+              <p>{props.profile ? props.profile.intro : <></>}</p>
             </div>
           </Grid>
           <Grid item xs={4}>
@@ -46,7 +47,7 @@ export default function Banner(props) {
             </div>
           </Grid>
         </Grid>
-      </section>
+      </div>
     </>
   );
 }

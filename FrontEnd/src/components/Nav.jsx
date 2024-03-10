@@ -1,11 +1,10 @@
 import * as React from "react";
 import Stack from "@mui/material/Stack";
 import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import { Link as ScrollLink } from "react-scroll";
-import { Link, NavLink } from "react-router-dom";
-
+import { Button } from "@mui/material";
 import Profile from "./Profile";
+import { NavLink } from "react-router-dom";
+import SideBar from "./SideBar";
 import "./Nav.css";
 
 export default function Nav() {
@@ -13,16 +12,7 @@ export default function Nav() {
     <div className="nav-bar MuiAppBar-colorTransparent" color="transperent">
       <Profile />
       <div className="right-bar">
-        <ScrollLink className="nav-link" to="homeSection" href="http://">
-          Home
-        </ScrollLink>
-        <ScrollLink className="nav-link" to="skillsSection" href="http://">
-          Skills
-        </ScrollLink>
-        <ScrollLink className="nav-link" to="projectSection" href="http://">
-          Projects
-        </ScrollLink>
-        <ScrollLink to="getInTouchSection" href="http://">
+        <NavLink to="/getintouch">
           <Button
             type="none"
             variant="outlined"
@@ -34,10 +24,11 @@ export default function Nav() {
           >
             Lets Connect
           </Button>
-        </ScrollLink>
-        <a href="./createProfile" className="nav-link">
-          Create New Profile
-        </a>
+        </NavLink>
+        <NavLink to="/dashboard" className="nav-link">
+          Dashboard
+        </NavLink>
+        <SideBar data={"Profile"}></SideBar>
       </div>
     </div>
   );

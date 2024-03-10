@@ -2,30 +2,37 @@ const express = require("express");
 const router = express.Router();
 const Profile = require("../models/profile.model");
 const { isLoggedIn, isAlreadyUser, isOwner } = require("../middleware");
+const projectRoutes = require("./projects");
 
-router.get("/", (req, res) => {
-  console.log("Hello");
-  res.send("hello");
+router.get("/", isLoggedIn, (req, res) => {
+  try {
+    console.log("Hello");
+    res.send("hello");
+  } catch (error) {
+    console.log(error);
+    res.send(error);
+  }
 });
 
 // create
 router.post("/new", isLoggedIn, async (req, res) => {
   try {
     let data = req.body;
+    const { id } = req.user;
+    data.owner = id;
+    console.log(req.user._id);
     const newProfile = new Profile(data);
     await newProfile.save();
-    const updatedData = await Profile.updateOne(
-      { _id: data._id },
-      { owner: req.user._id }
-    );
     console.log(newProfile);
-    console.log(updatedData);
     res.json(await Profile.findById({ _id: newProfile._id }));
   } catch (error) {
     console.log(error);
     res.send(error);
   }
 });
+
+//Create Project
+router.use("/projects", projectRoutes);
 
 //show route
 router.get("/all", async (req, res) => {
@@ -49,13 +56,27 @@ router.get("/:id", async (req, res) => {
 });
 
 //update Route
-router.put("/:id", isLoggedIn, isOwner, async (req, res) => {
-  let { id } = req.params;
-  let data1 = req.body;
-  let data = await Profile.updateOne({ _id: id }, data1);
-  res.send(
-    "recieved data " + data1.name + " | " + " matching data " + data.name
-  );
+router.put("/update/:id", isLoggedIn, isOwner, async (req, res) => {
+  try {
+    // let id = req.params.id.replace(/^:/, ""); // Remove colon if present
+    let { id } = req.params;
+    console.log("id -- " + id);
+    let data1 = req.body;
+
+    // Use findByIdAndUpdate to update the profile based on the provided ID
+    let data = await Profile.findByIdAndUpdate(id, data1);
+
+    res.send(
+      "received data " +
+        data1.name +
+        " | " +
+        " matching data " +
+        (data ? data.name : "Data not found")
+    );
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
 });
 
 //destroy by id
@@ -65,5 +86,8 @@ router.post("/:id/delete", isLoggedIn, isOwner, async (req, res) => {
   console.log(data);
   res.send("delete SucessFully data with id-" + id + data.name);
 });
+// router.delete("/all/delete",isLoggedIn,async (req,res)=>{
+//   let data =
+// })
 
 module.exports = router;

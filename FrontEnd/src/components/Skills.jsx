@@ -3,7 +3,7 @@ import SkillCarousal from "./SkillCarousal";
 import "./Skills.css";
 
 const Skills = (props) => {
-  let data = props ? props.data : {};
+  // console.log(data);
   return (
     <div
       id="skillsSection"
@@ -12,6 +12,13 @@ const Skills = (props) => {
     >
       <h1>Skills</h1>
       <h3>Areas Of Interest</h3>
+      <div className="skills-list">
+        {props.profile ? (
+          props.profile.skills?.map((dat, i) => <li key={i}>{dat}</li>)
+        ) : (
+          <></>
+        )}
+      </div>
     </div>
   );
 };
