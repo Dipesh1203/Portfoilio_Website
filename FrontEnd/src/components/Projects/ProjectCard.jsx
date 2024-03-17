@@ -1,21 +1,28 @@
 import React from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 import styles from "./ProjectCard.module.css";
 import { getImageUrl } from "../../utils";
 
-export const ProjectCard = ({
-  project: { title, imageSrc, description, skills, demo, source },
-}) => {
+export const ProjectCard = (props) => {
+  let projectId = props.project;
+  let [projectData, setProjectData] = useState([]);
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8080/profile/projects/${projectId}`)
+      .then((res) => setProjectData(res.data));
+  }, []);
   return (
     <div className={styles.container}>
       <img
-        src={getImageUrl(imageSrc)}
-        alt={`Image of ${title}`}
+        src={getImageUrl(projectData.image)}
+        alt={`Image of ${projectData.title}`}
         className={styles.image}
       />
-      <h3 className={styles.title}>{title}</h3>
-      <p className={styles.description}>{description}</p>
-      <ul className={styles.skills}>
+      <h3 className={styles.title}>{projectData.title}</h3>
+      <p className={styles.description}>{projectData.description}</p>
+      {/* <ul className={styles.skills}>
         {skills.map((skill, id) => {
           return (
             <li key={id} className={styles.skill}>
@@ -23,14 +30,14 @@ export const ProjectCard = ({
             </li>
           );
         })}
-      </ul>
+      </ul> */}
       <div className={styles.links}>
-        <a href={demo} className={styles.link}>
-          Demo
+        <a href={projectData.link} className={styles.link}>
+          link
         </a>
-        <a href={source} className={styles.link}>
+        {/* <a href={source} className={styles.link}>
           Source
-        </a>
+        </a> */}
       </div>
     </div>
   );

@@ -2,7 +2,8 @@ import React from "react";
 import { getImageUrl } from "../../utils";
 import styles from "../Skill/Skill.module.css";
 
-const Skill = () => {
+const Skill = (props) => {
+  let userDetails = props.data;
   return (
     <section className={styles.container}>
       <h1 className={styles.expertise}>Expertise</h1>
@@ -14,12 +15,8 @@ const Skill = () => {
         />
         <div className={styles.skillList}>
           <ul>
-            <li>Java</li>
-            <li>Javascript</li>
-            <li>MongoDB</li>
-            <li>Linux</li>
-            <li>ExpressJs</li>
-            <li>NodeJs</li>
+            {userDetails &&
+              userDetails.map((skill) => <li key={skill}>{skill}</li>)}
           </ul>
         </div>
       </div>

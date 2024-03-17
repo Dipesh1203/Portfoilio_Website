@@ -2,13 +2,14 @@ import React from "react";
 import { getImageUrl } from "../../utils";
 import styles from "../Banner/Banner.module.css";
 
-const Banner = () => {
+const Banner = (props) => {
+  let userDetails = props.data;
   return (
     <section className={styles.container}>
       <div className={styles.content}>
-        <h1 className={styles.title}>Hi, I'm Name </h1>
-        <h3 className={styles.headline}>HeadLine</h3>
-        <p className={styles.intro}>Intro</p>
+        <h1 className={styles.title}>Hi, I'm {userDetails.name}</h1>
+        <h3 className={styles.headline}>{userDetails.headline}</h3>
+        <p className={styles.intro}>{userDetails.intro}</p>
         <a href="#" className={styles.contactBtn}>
           Contact me
         </a>
