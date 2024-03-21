@@ -6,6 +6,8 @@ import axios from "axios";
 
 const Projects = (props) => {
   let projectId = props.projectId;
+  console.log(typeof props.projectId);
+  projectId;
   return (
     <section className={styles.container} id="projects">
       <h2 className={styles.title}>Projects</h2>
