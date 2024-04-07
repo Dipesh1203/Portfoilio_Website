@@ -7,7 +7,7 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   return (
     <nav className={styles.navbar}>
-      <NavLink className={styles.title} to="/">
+      <NavLink className={styles.title} to="/home">
         Skill Magnet
       </NavLink>
       <div className={styles.menu}>
@@ -28,7 +28,7 @@ const Navbar = () => {
           onClick={() => setMenuOpen(false)}
         >
           <li>
-            <NavLink to="/signUp">Register Now</NavLink>
+            <NavLink to="/user/signUp">Register Now</NavLink>
           </li>
           <li>
             <NavLink to="/getintouch">Get in Touch</NavLink>

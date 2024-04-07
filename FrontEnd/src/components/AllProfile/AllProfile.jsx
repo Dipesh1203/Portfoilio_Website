@@ -30,7 +30,7 @@ const Val = (props) => {
 const AllProfile = () => {
   let [data, setData] = useState([]);
   useEffect(() => {
-    axios.get("http://localhost:8080/profile/all").then((res) => {
+    axios.get("/api/profile/all").then((res) => {
       console.log(res.data);
       setData(res.data);
     });

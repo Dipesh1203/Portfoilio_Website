@@ -23,7 +23,7 @@ const Val = (props) => {
 const AllUser = () => {
   let [data, setData] = useState([]);
   useEffect(() => {
-    axios.get("http://localhost:8080/user/all").then((res) => {
+    axios.get("/api/user/all").then((res) => {
       console.log(res.data);
       setData(res.data);
     });

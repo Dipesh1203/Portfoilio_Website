@@ -16,6 +16,9 @@ router.get("/profile", isLoggedIn, async (req, res) => {
   const { id } = req.user;
   const data = await Profile.findOne({ owner: id });
   // console.log(req);
+  if (!data) {
+    return res.json("No Profile found");
+  }
   console.log(id);
   console.log(data);
   // if (data.length == 0) {
@@ -26,7 +29,7 @@ router.get("/profile", isLoggedIn, async (req, res) => {
   res.json({ data });
 });
 
-router.post("/signUp", async (req, res) => {
+router.post("/signup", async (req, res) => {
   try {
     let { username, email, password } = req.body;
     const newUser = new User({ username, email });
