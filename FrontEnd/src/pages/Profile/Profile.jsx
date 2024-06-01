@@ -5,8 +5,8 @@ import axios from "axios";
 import styles from "../../App.module.css";
 import Navbar from "../../components/Navbar";
 import Banner from "../../components/Banner/Banner";
-import Skill from "../../components/Skill/Skill";
-import Projects from "../../components/Projects/Projects";
+import Skill from "../Skill/Skill";
+import Projects from "../Projects/Projects";
 import Contact from "../../components/Contact/Contact";
 
 const Profile = () => {
@@ -19,10 +19,11 @@ const Profile = () => {
   console.log(data);
   return (
     <div className={styles.App}>
-      <Banner data={data} />
-      <Skill data={data.skills} />
-      <Projects projectId={data.projects} />
-      <Contact contact={data} />
+      <h1>{data}</h1>
+      {/* <Banner data={data} /> */}
+      {/* <Skill data={data.skills} /> */}
+      {/* <Projects projectId={data.projects} /> */}
+      {/* <Contact contact={data} /> */}
     </div>
   );
 };
