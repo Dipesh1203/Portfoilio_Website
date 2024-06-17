@@ -35,7 +35,7 @@ const profileSchema = new Schema({
     type: [String],
   },
   projects: {
-    type: Schema.Types.ObjectId,
+    type: [Schema.Types.ObjectId],
     ref: "Project",
   },
   owner: {

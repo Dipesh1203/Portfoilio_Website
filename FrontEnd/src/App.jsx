@@ -1,56 +1,27 @@
-import { useState, useEffect } from "react";
-import "./App.css";
-import Container from "@mui/material/Container";
-import Nav from "./components/Nav";
-import Banner from "./components/Banner";
-import Footer from "./components/Footer";
-import Skills from "./components/Skills";
-import Projects from "./components/Projects";
-import Getintouch from "./components/Getintouch";
-import { Link as ScrollLink, animateScroll as scroll } from "react-scroll";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import styles from "./App.module.css";
+import Navbar from "./components/Navbar";
+import Banner from "./components/Banner/Banner";
+import Skill from "./pages/Skill/Skill";
+import Projects from "./pages/Projects/Projects";
+import Contact from "./components/Contact/Contact";
+import { Link } from "react-router-dom";
 
 function App() {
-  let [data, setData] = useState(null);
-
+  let [data, setData] = useState([]);
   useEffect(() => {
-    // Perform some side effect, e.g., fetch data from an API
-    const fetchData = async () => {
-      try {
-        let response = await fetch(
-          "http://localhost:8080/profile/65ccbbcae42061d7c7e72835"
-        );
-        let res = await response.json();
-        console.log(res);
-        setData(res);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchData();
-
-    // Cleanup function (optional)
-    return () => {
-      // Perform cleanup, e.g., unsubscribe from a subscription
-      console.log("Cleanup");
-    };
+    axios
+      .get("/api/profile/65e9a20f689f6df955389092")
+      .then((res) => setData(res.data));
   }, []);
   return (
-    <>
-      <div className="App">
-        <Nav />
-        <div className="container">
-          {data ? <p>{data.name}</p> : ""}
-
-          <Banner data={data} />
-          <Skills data={data} />
-          <Projects />
-          <Getintouch />
-        </div>
-        <Container></Container>
-        <Footer />
-      </div>
-    </>
+    <div className={styles.App}>
+      <Banner data={data} />
+      {/* <Skill data={data.skills} /> */}
+      {/* <Projects projectId={data.projects} /> */}
+      {/* <Contact contact={data} /> */}
+    </div>
   );
 }
 

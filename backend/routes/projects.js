@@ -16,22 +16,25 @@ const { isAlreadyUser, isLoggedIn, isOwner } = require("../middleware.js");
 // });
 
 // create
-router.post("/new", isLoggedIn, isAlreadyUser, async (req, res) => {
+router.post("/new", isLoggedIn, async (req, res) => {
   try {
     let data = req.body;
+    let ownerProfileData = await Profile.findOne({ owner: req.user._id });
+    data.ownerProfile = ownerProfileData._id;
     const newProject = new Project(data);
     await newProject.save();
-    console.log("Project" + newProject);
-    let ownerProfileId = await Profile.findOne({
-      owner: req.locals.currUser._id,
-    });
-    let newProjectWithOwner = await Project.updateOne(
-      { _id: newProject._id },
-      { owner: ownerProfileId._id }
+    console.log("Project Created Succesfully" + newProject);
+    let finalUpdated = await Profile.findOneAndUpdate(
+      { owner: req.user._id },
+      {
+        ...ownerProfileData.toObject(),
+        projects: [...ownerProfileData.projects, newProject._id],
+      }
     );
-    console.log("ProjectWithOwner" + newProjectWithOwner);
+    console.log("Final Profile Object --> ");
+    console.log(finalUpdated);
     console.log("Successfully created Project");
-    res.json(data.title);
+    res.json(data);
   } catch (error) {
     console.log(error);
     res.json(error);
@@ -41,7 +44,8 @@ router.post("/new", isLoggedIn, isAlreadyUser, async (req, res) => {
 //show route
 router.get("/all", async (req, res) => {
   try {
-    let data = await Project.find();
+    let profileData = await Profile.findOne({ owner: req.user._id });
+    let data = await Project.find({ ownerProfile: profileData._id });
     console.log(data);
     res.json(data);
   } catch (error) {
