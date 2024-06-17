@@ -33,6 +33,7 @@ module.exports.isOwner = async (req, res, next) => {
     console.error(error);
     res.status(500).send("Internal Server Error");
   }
+  next();
 };
 module.exports.isAlreadyUser = async (req, res, next) => {
   let userBody = req.body;

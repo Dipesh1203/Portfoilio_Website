@@ -20,6 +20,27 @@ import AllProfile from "./pages/AllProfile/AllProfile.jsx";
 import UpdateProfile from "./pages/UpdateProfile/UpdateProfile.jsx";
 import Hello from "./components/Hello.jsx";
 import Home from "./pages/Home/Home.jsx";
+import UserDashBoard from "./pages/UserDashBoard/UserDashBoard.jsx";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+import { alpha } from "@mui/material/styles";
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#000000", // Black color
+      dark: "#000000", // Dark variant of primary color
+      light: "#000000", // Light variant of primary color
+      contrastText: "#ffffff", // Text color that contrasts with primary color
+    },
+    secondary: {
+      main: "#19376D", // Custom secondary color
+      dark: alpha("#19376D", 0.7), // Dark variant of secondary color with 70% transparency
+      light: alpha("#19376D", 0.3), // Light variant of secondary color with 30% transparency
+      contrastText: "#ffffff", // Text color that contrasts with secondary color
+    },
+  },
+});
 
 const router = createBrowserRouter([
   {
@@ -34,7 +55,6 @@ const router = createBrowserRouter([
   },
   {
     path: "/user",
-    element: <Layout />,
     children: [
       {
         path: "signup",
@@ -43,6 +63,10 @@ const router = createBrowserRouter([
       {
         path: "login",
         element: <Login />,
+      },
+      {
+        path: "dashboard",
+        element: <UserDashBoard />,
       },
     ],
   },
@@ -88,6 +112,6 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     {/* <App /> */}
-    <RouterProvider router={router} />
+    <RouterProvider router={router} theme={theme} />
   </React.StrictMode>
 );
