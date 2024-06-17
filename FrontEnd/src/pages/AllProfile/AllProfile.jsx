@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import styles from "./AllProfile.module.css";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Val = (props) => {
   let { userName, name, headline, email, _id } = props.item;
   return (
-    <Link href={`/profile/${_id}`}>
-      <div className={styles.badge}>
+    <Link className={styles.badge} to={`/profile/${_id}`}>
+      <div>
         <h3>
           <b>UserName : </b>
           {userName}
@@ -31,16 +31,15 @@ const Val = (props) => {
 const AllProfile = () => {
   let [data, setData] = useState([]);
   useEffect(() => {
-    axios.get("/api/profile/all").then((res) => {
-      console.log(res.data);
-      setData(res.data);
-    });
+    axios
+      .get("/api/profile/all")
+      .then((res) => {
+        setData(res.data);
+      })
+      .catch((err) => {
+        console.error("Error fetching profiles:", err);
+      });
   }, []);
-  // let navigate = useNavigate();
-  // const routeChange = (data) => {
-  //   let path = `${data}`;
-  //   navigate(path);
-  // };
   return (
     <div className={styles.App}>
       {data && data.map((i, j) => <Val key={j} item={i} />)}

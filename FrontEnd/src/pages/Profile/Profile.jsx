@@ -19,11 +19,15 @@ const Profile = () => {
   console.log(data);
   return (
     <div className={styles.App}>
-      <h1>{data}</h1>
-      {/* <Banner data={data} /> */}
-      {/* <Skill data={data.skills} /> */}
-      {/* <Projects projectId={data.projects} /> */}
-      {/* <Contact contact={data} /> */}
+      {/* <h1>{data}</h1> */}
+      {data && (
+        <>
+          <Banner data={data} />
+          <Skill data={data.skills} />
+          <Projects projectId={data.projects} />
+          <Contact contact={data} />
+        </>
+      )}
     </div>
   );
 };
