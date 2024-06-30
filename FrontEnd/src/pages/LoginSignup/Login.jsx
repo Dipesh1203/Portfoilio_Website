@@ -17,7 +17,6 @@ const Login = () => {
       let res = await axios.post("/api/user/login", data);
       setSuccess(true);
       console.log(res);
-      setTimeout(() => navigate("/home"), 1000);
     } catch (error) {
       setError(error);
       console.error("error", error);

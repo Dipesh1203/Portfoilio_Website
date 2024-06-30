@@ -1,20 +1,26 @@
 const Profile = require("./models/profile.model");
 const User = require("./models/user.model");
 const Project = require("./models/projects.model");
+const jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 
-module.exports.isLoggedIn = async (req, res, next) => {
-  if (!req.isAuthenticated()) {
-    console.log("login first");
-    return res.redirect("/user/login");
+module.exports.isLoggedIn = (req, res, next) => {
+  console.log(req.cookies);
+  const token = req.cookies.token;
+  if (!token) {
+    res.status(403).send("please login first");
   }
-  next();
-};
-module.exports.saveRedirectUrl = (req, res, next) => {
-  if (req.session.redirectUrl) {
-    res.locals.redirectUrl = req.session.redirectUrl;
+  try {
+    const decode = jwt.verify(token, "asdf");
+    console.log(decode);
+    req.user = decode;
+    return next();
+  } catch (error) {
+    console.log(error);
+    res.status(401).send("Invalid");
   }
-  next();
 };
+
 module.exports.isOwner = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -35,6 +41,7 @@ module.exports.isOwner = async (req, res, next) => {
   }
   next();
 };
+
 module.exports.isAlreadyUser = async (req, res, next) => {
   let userBody = req.body;
   let userData = await Profile.findOne({ email: userBody.email });

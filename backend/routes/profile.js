@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const Profile = require("../models/profile.model");
-const { isLoggedIn, isAlreadyUser, isOwner } = require("../middleware");
+const { isAlreadyUser } = require("../middleware");
 const projectRoutes = require("./projects");
 
-router.get("/", isLoggedIn, (req, res) => {
+router.get("/", (req, res) => {
   try {
     console.log("Hello");
     res.send("hello");
@@ -15,7 +15,7 @@ router.get("/", isLoggedIn, (req, res) => {
 });
 
 // create
-router.post("/new", isLoggedIn, async (req, res) => {
+router.post("/new", isAlreadyUser, async (req, res) => {
   try {
     let data = req.body;
     const { id } = req.user;
@@ -56,7 +56,7 @@ router.get("/:id", async (req, res) => {
 });
 
 //update Route
-router.put("/update/:id", isLoggedIn, isOwner, async (req, res) => {
+router.put("/update/:id", async (req, res) => {
   try {
     // let id = req.params.id.replace(/^:/, ""); // Remove colon if present
     let { id } = req.params;
@@ -80,7 +80,7 @@ router.put("/update/:id", isLoggedIn, isOwner, async (req, res) => {
 });
 
 //destroy by id
-router.post("/:id/delete", isLoggedIn, isOwner, async (req, res) => {
+router.post("/:id/delete", async (req, res) => {
   let { id } = req.params;
   let data = await Profile.deleteOne({ _id: id });
   console.log(data);

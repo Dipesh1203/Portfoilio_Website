@@ -3,7 +3,6 @@ const router = express.Router();
 const Project = require("../models/projects.model.js");
 const Profile = require("../models/profile.model.js");
 const User = require("../models/user.model.js");
-const { isAlreadyUser, isLoggedIn, isOwner } = require("../middleware.js");
 
 // router.put("/new", async (req, res) => {
 //   try {
@@ -16,7 +15,7 @@ const { isAlreadyUser, isLoggedIn, isOwner } = require("../middleware.js");
 // });
 
 // create
-router.post("/new", isLoggedIn, async (req, res) => {
+router.post("/new", async (req, res) => {
   try {
     let data = req.body;
     let ownerProfileData = await Profile.findOne({ owner: req.user._id });
@@ -65,7 +64,7 @@ router.get("/:id", async (req, res) => {
 });
 
 //update Route
-router.put("/:id", isLoggedIn, isOwner, async (req, res) => {
+router.put("/:id", async (req, res) => {
   let { id } = req.params;
   let data1 = req.body;
   let data = await Project.updateOne({ _id: id }, data1);
@@ -73,7 +72,7 @@ router.put("/:id", isLoggedIn, isOwner, async (req, res) => {
 });
 
 //destroy by id
-router.post("/:id/delete", isLoggedIn, isOwner, async (req, res) => {
+router.post("/:id/delete", async (req, res) => {
   let { id } = req.params;
   let data = await Project.deleteOne({ _id: id });
   console.log(data);

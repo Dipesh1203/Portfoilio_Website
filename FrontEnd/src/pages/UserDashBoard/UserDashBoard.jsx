@@ -1,97 +1,141 @@
-import * as React from "react";
-import Box from "@mui/material/Box";
-import SwipeableDrawer from "@mui/material/SwipeableDrawer";
-import Button from "@mui/material/Button";
-import List from "@mui/material/List";
-import Divider from "@mui/material/Divider";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from "react";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import styles from "./UserDashBoard.module.css";
 
 const UserDashBoard = () => {
-  const [state, setState] = React.useState({
-    top: false,
-    left: false,
-    bottom: false,
-    right: false,
-  });
-
-  const toggleDrawer = (anchor, open) => (event) => {
-    if (
-      event &&
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
-    ) {
-      return;
+  const { register, handleSubmit, formState } = useForm();
+  console.log(formState.errors);
+  const navigate = useNavigate();
+  const onSubmit = async (data) => {
+    try {
+      console.log(data);
+      // let res = await axios.post("/api/user/", data);
+      // console.log(res);
+      navigate(`/home`);
+    } catch (error) {
+      console.error("error", error);
     }
-
-    setState({ ...state, [anchor]: open });
   };
-
-  const list = (anchor) => (
-    <Box
-      sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
-      role="presentation"
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
-    >
-      <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-    </Box>
-  );
-  const anchor = "left";
   return (
-    <div>
-      {/*  */}
-      <React.Fragment key="left">
-        <Button onClick={toggleDrawer(anchor, true)}>
-          <i className="fa-solid fa-bars"></i>
-        </Button>
-        <SwipeableDrawer
-          anchor={anchor}
-          open={state[anchor]}
-          onClose={toggleDrawer(anchor, false)}
-          onOpen={toggleDrawer(anchor, true)}
+    <section className={styles.container}>
+      <div className={styles.containerForm}>
+        <h2>DashBoard</h2>
+
+        <form
+          onSubmit={handleSubmit((data) => onSubmit(data))}
+          className={styles.form}
         >
-          {list(anchor)}
-        </SwipeableDrawer>
-      </React.Fragment>
-      <h1>Hello Everyone</h1>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, autem
-        unde? Saepe accusamus perspiciatis ipsam, magni nulla debitis dolor
-        eveniet quo. Repellendus nam labore placeat mollitia corrupti
-        repudiandae ipsa modi?
-      </p>
-    </div>
+          <div className="col">
+            <label htmlFor="username">User Name</label>
+            <input
+              {...register("username", { required: true, minLength: 1 })}
+              name="username"
+              type="text"
+              id="username"
+            />
+          </div>
+          <div className="col">
+            <label htmlFor="email">Email</label>
+            <input
+              {...register("email", { required: true })}
+              name="email"
+              type="email"
+              id="email"
+            />
+          </div>
+          <div className="col">
+            <label htmlFor="password">Password</label>
+            <input
+              {...register("password", { required: true, minLength: 8 })}
+              name="password"
+              type="password"
+              id="password"
+            />
+          </div>
+          <div className="input-group mb-3">
+            <span className="input-group-text" id="basic-addon1">
+              @
+            </span>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Username"
+              aria-label="Username"
+              aria-describedby="basic-addon1"
+            />
+          </div>
+
+          <div className="input-group mb-3">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Recipient's username"
+              aria-label="Recipient's username"
+              aria-describedby="basic-addon2"
+            />
+            <span className="input-group-text" id="basic-addon2">
+              @example.com
+            </span>
+          </div>
+
+          <div className="mb-3">
+            <label for="basic-url" className="form-label">
+              Your vanity URL
+            </label>
+            <div className="input-group">
+              <span className="input-group-text" id="basic-addon3">
+                https://example.com/users/
+              </span>
+              <input
+                type="text"
+                className="form-control"
+                id="basic-url"
+                aria-describedby="basic-addon3 basic-addon4"
+              />
+            </div>
+            <div className="form-text" id="basic-addon4">
+              Example help text goes outside the input group.
+            </div>
+          </div>
+
+          <div className="input-group mb-3">
+            <span className="input-group-text">$</span>
+            <input
+              type="text"
+              className="form-control"
+              aria-label="Amount (to the nearest dollar)"
+            />
+            <span className="input-group-text">.00</span>
+          </div>
+
+          <div className="input-group mb-3">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Username"
+              aria-label="Username"
+            />
+            <span className="input-group-text">@</span>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Server"
+              aria-label="Server"
+            />
+          </div>
+
+          <div className="input-group">
+            <span className="input-group-text">With textarea</span>
+            <textarea
+              className="form-control"
+              aria-label="With textarea"
+            ></textarea>
+          </div>
+          <button className="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </section>
   );
 };
 
